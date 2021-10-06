@@ -31,8 +31,11 @@ X Sorry, your reply was invalid: Multi AZ clusters require that the number of co
 ? Pod CIDR: 10.128.0.0/14
 ? Host prefix: 23
 I: Creating cluster 'rosatest'
-I: To create this cluster again in the future, you can run:
-   rosa create cluster --cluster-name rosatest --role-arn arn:aws:iam::914054700962:role/assumeopenshift --support-role-arn arn:aws:iam::914054700962:role/assumeopenshift --master-iam-role arn:aws:iam::914054700962:role/assumeopenshift --worker-iam-role arn:aws:iam::914054700962:role/assumeopenshift --operator-roles-prefix rosatest-x1e9 --multi-az --region ap-southeast-2 --version 4.8.13 --enable-autoscaling --min-replicas 3 --max-replicas 3 --compute-machine-type m5.xlarge --machine-cidr 10.0.0.0/16 --service-cidr 172.30.0.0/16 --pod-cidr 10.128.0.0/14 --host-prefix 23
+
+To create this cluster again in the future, you can run:
+#rosa cli
+rosa create cluster --cluster-name rosatest --role-arn arn:aws:iam::914054700962:role/assumeopenshift --support-role-arn arn:aws:iam::914054700962:role/assumeopenshift --master-iam-role arn:aws:iam::914054700962:role/assumeopenshift --worker-iam-role arn:aws:iam::914054700962:role/assumeopenshift --operator-roles-prefix rosatest-x1e9 --multi-az --region ap-southeast-2 --version 4.8.13 --enable-autoscaling --min-replicas 3 --max-replicas 3 --compute-machine-type m5.xlarge --machine-cidr 10.0.0.0/16 --service-cidr 172.30.0.0/16 --pod-cidr 10.128.0.0/14 --host-prefix 23
+
 I: To view a list of clusters and their status, run 'rosa list clusters'
 I: Cluster 'rosatest' has been created.
 I: Once the cluster is installed you will need to add an Identity Provider before you can login into the cluster. See 'rosa create idp --help' for more information.
