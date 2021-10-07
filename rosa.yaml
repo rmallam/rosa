@@ -1,0 +1,40 @@
+---
+- name: update web servers
+  hosts: localhost
+  remote_user: root
+
+  tasks:
+    - name: login to Openshift api using rosa token
+      shell: rosa login {{ rosa_login_token }}
+
+    - name: assume role
+      sts_assume_role:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        role_arn: "arn:aws:iam::914054700962:role/assumeopenshift"
+        role_session_name: "assumerosarole"
+      register: assumed_role
+    
+    - name: Print return information from the previous task
+      ansible.builtin.debug:
+        var: assumed_role
+        verbosity: 2
+
+    - name: Create Rosa cluster
+      shell: |
+        export AWS_ACCESS_KEY_ID="{{ assumed_role.sts_creds.access_key }}"
+        export AWS_SECRET_ACCESS_KEY="{{ assumed_role.sts_creds.secret_key }}"
+        export AWS_SESSION_TOKEN="{{ assumed_role.sts_creds.session_token }}"
+        export AWS_DEFAULT_REGION="{{ aws_region }}"
+        rosa create cluster --cluster-name="{{ rosaclustername }}"
+
+    - name: watch rosa creation logs
+      shell: |
+       rosa describe cluster -c {{ rosaclustername }}
+       rosa logs install -c {{ rosaclustername }} --watch
+
+
+
+
+
+
