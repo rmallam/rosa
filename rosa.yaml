@@ -31,7 +31,7 @@
     - name: watch rosa creation logs
       shell: |
        rosa describe cluster -c {{ rosaclustername }}
-       rosa logs install -c {{ rosaclustername }} --watch
+      #  rosa logs install -c {{ rosaclustername }} --watch
 
 
 
